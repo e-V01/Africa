@@ -13,6 +13,7 @@ struct MainView: View {
             ContentView()
                 .tabItem {
                     Image(systemName: "square.grid.2x2")
+                    Text("Browse")
                 }
             VideoListView()
                 .tabItem { 
