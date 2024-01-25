@@ -19,8 +19,9 @@ struct ContentView: View {
                                                   bottom: 0,
                                                   trailing: 0))
                     ForEach(animals) { animal in
-                        NavigationLink(destination: AnimalListItemView(animal: animal)) {
-                            AnimalListItemView(animal: animal)
+                        NavigationLink(destination:
+                                        AnimalDetailView(animal: animal)) {
+                                        AnimalListItemView(animal: animal)
                         }
                     }
             }
