@@ -8,8 +8,19 @@
 import SwiftUI
 
 struct GalleryView: View {
+    // simple grid def
+    let gridLayout: [GridItem] = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
     var body: some View {
-        Text("Gallery")
+        ScrollView(.vertical, showsIndicators: false) {
+            Text("Gallery")
+            
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(MotionAnimationView())
     }
 }
 
