@@ -12,7 +12,33 @@ struct ContentView: View {
     let haptics = UIImpactFeedbackGenerator(style: .medium)
     @State private var isGridViewActive: Bool = false
     
-    let gridLayout: [GridItem] = Array(repeating: GridItem(.flexible()), count: 2)
+//    let gridLayout: [GridItem] = Array(repeating: GridItem(.flexible()), count: 2)
+    
+    @State private var gridLayout: [GridItem] = [GridItem(.flexible())]
+    @State private var gridColumn: Int = 1
+    @State private var toolbarIcon: String = "square.grid.2x2"
+    
+    func gridSwitch() {
+        gridLayout = Array(repeating: .init(.flexible()), count: gridLayout.count % 3 + 1)
+        gridColumn = gridLayout.count
+        print("Grid number \(gridColumn)")
+        
+        //toolbar Icon
+        switch gridColumn {
+        case 1:
+            toolbarIcon = "square.grid.2x2"
+        case 2:
+            toolbarIcon = "square.grid.3x2"
+        case 3:
+            toolbarIcon = "rectangle.grid.1x2"
+        default:
+            toolbarIcon = "square.grid.2x2"
+        }
+    }
+    // : Example
+//    If gridLayout.count is 10, then gridLayout.count % 3 is 1, and adding 1 gives 2.
+//    If gridLayout.count is 2, then gridLayout.count % 3 is 2, and adding 1 gives 3.
+//    In summary, this expression effectively cycles the values 1, 2, and 3 based on the current count of elements in the gridLayout array
     
     var body: some View {
             NavigationView {
@@ -43,7 +69,7 @@ struct ContentView: View {
                                 }
                             }
                             .padding()
-                            .animation(.easeIn(duration: 1))
+                            .animation(.easeIn(duration: 0.5))
                         }
                     } // condition
                 }// list
@@ -68,8 +94,9 @@ struct ContentView: View {
                                     print("Grid")
                                     isGridViewActive = true
                                     haptics.impactOccurred()
+                                    gridSwitch()
                                 } label: {
-                                    Image(systemName: "square.grid.2x2")
+                                    Image(systemName: toolbarIcon)
                                         .font(.title2)
                                         .foregroundStyle(isGridViewActive ? Color.accentColor : .primary)
                                 }
